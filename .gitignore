@@ -37,3 +37,6 @@ env/
 # OS specific
 .DS_Store
 Thumbs.db
+
+# Ignore the Excel output file for script-writer agent
+script_outputs.xlsx
