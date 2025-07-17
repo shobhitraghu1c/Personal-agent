@@ -80,6 +80,7 @@ def setup_gemini_llm():
         callback_manager=CallbackManager([StreamingStdOutCallbackHandler()])
     )
 ```
+# working fine
 
 Available models:
 - `gemini-1.5-flash` (fastest, free tier)
