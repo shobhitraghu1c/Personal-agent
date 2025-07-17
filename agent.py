@@ -5,9 +5,21 @@ import datetime
 import requests
 from dotenv import load_dotenv
 from langchain_google_genai import ChatGoogleGenerativeAI
+import pandas as pd
 
 # Load environment variables
 load_dotenv()
+
+EXCEL_FILE = "script_outputs.xlsx"
+
+def save_to_excel(topic: str, output: str):
+    row = {"Topic": topic, "Script": output}
+    if os.path.exists(EXCEL_FILE):
+        df = pd.read_excel(EXCEL_FILE)
+        df = pd.concat([df, pd.DataFrame([row])], ignore_index=True)
+    else:
+        df = pd.DataFrame([row])
+    df.to_excel(EXCEL_FILE, index=False)
 
 def setup_gemini_llm():
     """Initialize Gemini LLM for script-writer agent"""
@@ -55,8 +67,11 @@ def script_writer_agent(user_input: str) -> str:
         try:
             response = llm.invoke(prompt)
             if isinstance(response, dict) and 'content' in response:
-                return response['content']
-            return str(response)
+                output = response['content']
+            else:
+                output = str(response)
+            save_to_excel(topic, output)
+            return output
         except Exception as e:
             return f"Error generating script: {str(e)}"
     else:
