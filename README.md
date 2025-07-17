@@ -2,6 +2,15 @@
 
 A simple AI agent built with LangChain and Google's Gemini model.
 
+## Security Notice ⚠️
+
+**IMPORTANT:** This repository uses API keys that should be kept private. 
+
+- Never commit your `.env` file to version control
+- Always use `.gitignore` to exclude your API keys
+- Use `.env.example` as a template without real credentials
+- If you accidentally expose your API key, regenerate it immediately
+
 ## Setup
 
 1. Install dependencies:
